@@ -1,15 +1,9 @@
 import axios from "axios";
+const BASEURL = "https://randomuser.me/api/?results=20";
 
-// Export an object containing methods we'll use for accessing the Dog.Ceo API
-
+// eslint-disable-next-line
 export default {
-  getRandomDog: function() {
-    return axios.get("https://dog.ceo/api/breeds/image/random");
-  },
-  getDogsOfBreed: function(breed) {
-    return axios.get("https://dog.ceo/api/breed/" + breed + "/images");
-  },
-  getBaseBreedsList: function() {
-    return axios.get("https://dog.ceo/api/breeds/list");
+  search: function(query) {
+    return axios.get(BASEURL);
   }
 };
