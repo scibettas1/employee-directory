@@ -1,12 +1,13 @@
 import React from "react";
 
 function EmployeeDetail(props) {
+  console.log(props)
   return (
-    <div className="text-center">
+    <div>
       <img alt={props.title} className="img-fluid" src={props.src} style={{ margin: "0 auto" }} />
-      <h3>Name: {this.state.result.results.name.first} + {props.name.first}</h3>
-      <h3>Country: {props.location.country}</h3>
-      <h3>Email: {props.email}</h3>
+      <p>Name: {props.employee.name}</p>
+      <p>Country: {props.employee.country}</p>
+      <p>Email: {props.employee.email}</p>
     </div>
   );
 }

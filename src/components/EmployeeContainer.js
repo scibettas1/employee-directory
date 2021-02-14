@@ -9,16 +9,28 @@ import API from "../utils/API";
 
 class EmployeeContainer extends Component {
   state = {
-    result: {},
+    result: [],
     search: ""
   };
 
   componentDidMount() {
     API.search()
-      .then(res => { this.setState({ result: res.data })})
+      .then((res) => {
+        //console.log(res.data.results)
+        var employeeArray = res.data.results.map((employee)=>{
+          //console.log(employee)
+          return {
+            name: employee.name.first + " " + employee.name.last,
+            country: employee.location.country,
+            email: employee.email,
+            picture: employee.picture.thumbnail
+          }
+        })
+        //console.log(employeeArray)
+         this.setState({ result: employeeArray })
+         console.log(this.state)
+        })
       .catch(err => console.log(err));
-     console.log(this.state.result)
-console.log(this.state.result.results)
   };
 
   handleInputChange = event => {
@@ -43,10 +55,9 @@ console.log(this.state.result.results)
             <Card
               heading={this.state.result.Name || "Search for an Employee"}
             >
-              {this.state.result.results ? (
+              {this.state.result.length !== 0 ? (
                 <EmployeeDetail
-                  Name={this.state.result.results[0].name.first}
-
+                  employee={this.state.result[0]}
                 />
               ) : (
                 <h3>No Results to Display</h3>
